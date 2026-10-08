@@ -13,6 +13,34 @@
 
 ## Como compilar e executar
 
+Python é interpretado, então não há etapa de compilação. Basta ter o **Python 3** instalado e seguir os passos abaixo.
+
+1. Instale as dependências:
+
+   ```bash
+   pip install folium pandas
+   ```
+
+2. Confira se os arquivos de dados estão na pasta `data/`:
+
+   - `data/nos.csv`: cruzamentos (`osmid`, `latitude`, `longitude`)
+   - `data/arestas.csv`: ruas entre cruzamentos (`origem`, `destino`, `distancia`, `nome_rua`)
+
+3. Execute o script **a partir da raiz do projeto** (os caminhos dos CSVs são relativos a ela):
+
+   ```bash
+   python script.py
+   ```
+
+4. Quando solicitado, digite o ID (`osmid`) do cruzamento de origem e depois o de destino. Os IDs precisam existir em `data/nos.csv`. Exemplo:
+
+   ```
+   Digite o ID de origem: 259576101
+   Digite o ID de destino: 2405704515
+   ```
+
+5. Ao final, o script gera o arquivo `rotaBuscaGrupoEGR.html` na raiz do projeto. Abra-o no navegador para ver a rota no mapa (origem em verde, destino em vermelho).
+
 
 
 ## Contexto e informações sobre o trabalho

@@ -1,10 +1,13 @@
 # Arquivo .gitignore para ignorar arquivos e diretórios específicos
 
-# Ignora arquivos de log
+# Ignora arquivos de log e pycache
 *.log
+pycache/
+
 
 # Ignora arquivos do VS Code
 .vscode/
+
 
 # Ignora o arquivo de mapa gerado em HTML
 rotaBuscaGrupoEGR.html
