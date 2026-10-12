@@ -2,7 +2,7 @@
 
 # Ignora arquivos de log e pycache
 *.log
-pycache/
+src/__pycache__/
 
 
 # Ignora arquivos do VS Code
@@ -11,4 +11,8 @@ pycache/
 
 # Ignora o arquivo de mapa gerado em HTML
 rotaBuscaGrupoEGR.html
+rota_desafio_1_otima.html
+rota_desafio_2_expressa.html
 
+# Ignora o ambiente virtual
+.venv/
