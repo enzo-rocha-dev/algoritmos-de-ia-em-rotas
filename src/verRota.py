@@ -70,4 +70,3 @@ def gerar_html_comparacao(caminho_otimo_ids, caminho_expresso_ids, arquivo_nos, 
     folium.Marker(coords_otimo[-1], popup="Destino", icon=folium.Icon(color="red", icon="stop")).add_to(mapa)
 
     mapa.save(arquivo_saida)
-    print(f"Mapa comparativo gerado com sucesso: {arquivo_saida}")

@@ -42,9 +42,26 @@ def main():
     grafo, coordenadas = carregar_dados()
     print("Dados carregados com sucesso!\n")
 
-    # Interação básica solicitando os pontos ao usuário
-    origem = int(input("Digite o ID de origem: "))
-    destino = int(input("Digite o ID de destino: "))
+    # Interação básica solicitando os pontos ao usuário com validação
+    while True:
+        try:
+            origem = int(input("Digite o ID de origem: "))
+            if origem not in coordenadas:
+                print("Erro: O ID de origem não foi encontrado nos nós. Tente novamente.")
+                continue
+            break
+        except ValueError:
+            print("Erro: O ID deve ser um número inteiro. Tente novamente.")
+
+    while True:
+        try:
+            destino = int(input("Digite o ID de destino: "))
+            if destino not in coordenadas:
+                print("Erro: O ID de destino não foi encontrado nos nós. Tente novamente.")
+                continue
+            break
+        except ValueError:
+            print("Erro: O ID deve ser um número inteiro. Tente novamente.")
 
     # --- DESAFIO 1: A* TRADICIONAL ---
     cam_otimo, dist_otima, exp_otima = haversine_a_star(origem, destino, grafo, coordenadas)
@@ -93,7 +110,6 @@ def main():
 
     # --- GERAÇÃO DO MAPA FINAL COMBINADO ---
     if cam_otimo and cam_expresso:
-        print("\nGerando mapa comparativo com as duas rotas...")
         gerar_html_comparacao(cam_otimo, cam_expresso, ARQUIVO_NOS, "rotaBuscaGrupoEGR.html")
 
 # Inicia a execução do programa
