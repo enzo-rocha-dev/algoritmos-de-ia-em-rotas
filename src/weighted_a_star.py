@@ -1,3 +1,8 @@
+# Integrantes do grupo:
+# Enzo Rocha - 15449850
+# Giovana Leite - 16869044
+# Rafael Oliveira - 17152206
+
 import math
 
 def calcular_haversine(latitude_origem, longitude_origem, latitude_destino, longitude_destino):

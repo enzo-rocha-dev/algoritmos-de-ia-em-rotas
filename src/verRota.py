@@ -1,3 +1,8 @@
+# Integrantes do grupo:
+# Enzo Rocha - 15449850
+# Giovana Leite - 16869044
+# Rafael Oliveira - 17152206
+
 import folium
 import pandas as pd
 

@@ -1,3 +1,8 @@
+# Integrantes do grupo:
+# Enzo Rocha - 15449850
+# Giovana Leite - 16869044
+# Rafael Oliveira - 17152206
+
 import csv
 import time
 from src.haversine_a_star import haversine_a_star
@@ -7,7 +12,7 @@ from src.verRota import gerar_html_rota, gerar_html_comparacao
 # Configurações de arquivos e parâmetros da busca
 ARQUIVO_NOS = "data/nos.csv"
 ARQUIVO_ARESTAS = "data/arestas.csv"
-PESO_DE_HEURISTICA = 3
+PESO_DE_HEURISTICA = 1.25
 
 def carregar_dados():
     #Lê os arquivos CSV e os converte em estruturas de dados úteis na memória: um dicionário para as coordenadas e outro simulando o grafo de ruas.
