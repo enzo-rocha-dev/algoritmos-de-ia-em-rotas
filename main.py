@@ -6,6 +6,7 @@ from src.verRota import gerar_html_rota
 
 ARQUIVO_NOS = "data/nos.csv"
 ARQUIVO_ARESTAS = "data/arestas.csv"
+PESO_DE_HEURISTICA = 3
 
 def carregar_dados():
     coordenadas = {}
@@ -39,46 +40,46 @@ def main():
     grafo, coordenadas = carregar_dados()
     print("Dados carregados com sucesso!\n")
 
-    # OSMIDs de teste (Substitua por nós que existam no arquivo da cidade)
-    # Aqui utilizamos valores de teste fictícios para a estrutura rodar
-    origem = list(coordenadas.keys())[0]
-    destino = list(coordenadas.keys())[1000] # Pegando um nó arbitrário distante para o teste
+    origem = int(input("Digite o ID de origem: "))
+    destino = int(input("Digite o ID de destino: "))
 
     # ==========================
     # DESAFIO 1: A* Tradicional
     # ==========================
     cam_otimo, dist_otima, exp_otima = haversine_a_star(origem, destino, grafo, coordenadas)
 
-    print("#" * 50)
-    print("# RESULTADO DA BUSCA")
-    print("#" * 50)
-    print("DESAFIO 1 (ROTA ÓTIMA)")
+    print(f"\n#{"-" * 50}")
+    print("# RESULTADO DA BUSCA - DESAFIO 1 (ROTA ÓTIMA)")
+    print(f"#{"-" * 50}")
     print(f"# Algoritmo utilizado: A* com Heurística de Haversine")
     print(f"# Origem (osmid): {origem}")
     print(f"# Destino (osmid): {destino}")
-    print("#")
+    print(f"#{"-" * 50}")
     
     if cam_otimo:
         print(f"# Caminho encontrado (Qtd nós): {len(cam_otimo)} cruzamentos")
         print(f"# Distância da Rota: {dist_otima:.2f} metros")
         print(f"# NÓS EXPANDIDOS: {exp_otima}")
-        gerar_html_rota(cam_otimo, ARQUIVO_NOS, "rota_desafio_1_otima.html", cor_linha='blue')
+        gerar_html_rota(cam_otimo, ARQUIVO_NOS, "rota_desafio_1_otima.html", cor_linha='green')
     else:
         print("# NENHUM CAMINHO ENCONTRADO.")
-    
-    print("#" * 50)
+    print(f"#{"-" * 50}")
+
+    print("\n")
 
     # ==========================
     # DESAFIO 2: Weighted A*
     # ==========================
     # O peso de 1.5 é um bom valor inicial para ganhar tempo cedendo um pouco da otimalidade
-    cam_expresso, dist_expressa, exp_expressa = weighted_a_star(origem, destino, grafo, coordenadas, peso=1.5)
+    cam_expresso, dist_expressa, exp_expressa = weighted_a_star(origem, destino, grafo, coordenadas, peso=PESO_DE_HEURISTICA)
 
-    print("DESAFIO 2 (ROTA EXPRESSA)")
-    print(f"# Algoritmo utilizado: Weighted A* (Peso: 1.5)")
+    print(f"#{"-" * 50}")
+    print("# RESULTADO DA BUSCA - DESAFIO 2 (ROTA EXPRESSA)")
+    print(f"#{"-" * 50}")
+    print(f"# Algoritmo utilizado: Weighted A* (Peso: {PESO_DE_HEURISTICA})")
     print(f"# Origem (osmid): {origem}")
     print(f"# Destino (osmid): {destino}")
-    print("#")
+    print(f"#{"-" * 50}")
     
     if cam_expresso:
         # Cálculos de variação percentual em relação à rota ótima
@@ -92,12 +93,11 @@ def main():
         print(f"# Caminho encontrado (Qtd nós): {len(cam_expresso)} cruzamentos")
         print(f"# Distância da Rota: {dist_expressa:.2f} metros ({sinal_dist}{pct_dist:.2f}%)")
         print(f"# NÓS EXPANDIDOS: {exp_expressa} ({sinal_exp}{pct_exp:.2f}%)")
-        gerar_html_rota(cam_expresso, ARQUIVO_NOS, "rota_desafio_2_expressa.html", cor_linha='orange')
+        gerar_html_rota(cam_expresso, ARQUIVO_NOS, "rota_desafio_2_expressa.html", cor_linha='red')
     else:
         print("# NENHUM CAMINHO ENCONTRADO.")
 
-    print("#" * 50)
-    print("\n[+] Mapas HTML (rota_desafio_1_otima.html e rota_desafio_2_expressa.html) foram gerados com sucesso!")
+    print(f"#{"-" * 50}")
 
 if __name__ == "__main__":
     main()

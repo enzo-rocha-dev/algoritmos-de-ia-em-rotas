@@ -1,4 +1,3 @@
-import heapq
 import math
 
 def calcular_haversine(lat1, lon1, lat2, lon2):
@@ -13,17 +12,20 @@ def calcular_haversine(lat1, lon1, lat2, lon2):
 
 def weighted_a_star(origem, destino, grafo, coordenadas, peso=1.5):
     """
-    Executa o Weighted A* (peso padrão = 1.5) visando velocidade (Desafio 2).
+    Executa o Weighted A* (peso padrão = 1.5) visando velocidade, sem o uso de heapq.
     """
+    # Fronteira como uma lista comum
     fronteira = []
-    heapq.heappush(fronteira, (0, 0, origem, [origem]))
+    fronteira.append((0, 0, origem, [origem]))
     
     custo_g_minimo = {origem: 0}
     nos_expandidos = 0
     lat_destino, lon_destino = coordenadas[destino]
 
     while fronteira:
-        f_atual, g_atual, atual, caminho = heapq.heappop(fronteira)
+        # Encontra manualmente o índice do elemento com o menor f_score na lista
+        menor_indice = min(range(len(fronteira)), key=lambda i: fronteira[i][0])
+        f_atual, g_atual, atual, caminho = fronteira.pop(menor_indice)
 
         if atual == destino:
             return caminho, g_atual, nos_expandidos
@@ -41,12 +43,12 @@ def weighted_a_star(origem, destino, grafo, coordenadas, peso=1.5):
                 lat_viz, lon_viz = coordenadas[vizinho]
                 h_score = calcular_haversine(lat_viz, lon_viz, lat_destino, lon_destino)
                 
-                # A diferença chave: a heurística ganha um peso extra
+                # A heurística ganha um peso extra
                 f_score = novo_g + (peso * h_score)
                 
                 novo_caminho = list(caminho)
                 novo_caminho.append(vizinho)
                 
-                heapq.heappush(fronteira, (f_score, novo_g, vizinho, novo_caminho))
+                fronteira.append((f_score, novo_g, vizinho, novo_caminho))
 
     return None, 0, nos_expandidos
